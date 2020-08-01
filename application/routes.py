@@ -9,7 +9,7 @@ bp = Blueprint('urlshort', __name__)
 
 @bp.route('/')
 def home():
-    return render_template('home.html', codes=session.keys())
+    return render_template('home.html', codes=session.keys(), urls=session.values())
 
 
 @bp.route('/your-url', methods=['GET', 'POST'])
@@ -23,6 +23,10 @@ def your_url():
 
         if request.form['code'] in urls.keys():
             flash('That short name has already been taken. Please select another name.')
+            return redirect(url_for('urlshort.home'))
+
+        if 'url' in request.form.keys():
+            flash('That url is already been created. Please select another name.')
             return redirect(url_for('urlshort.home'))
 
         if 'url' in request.form.keys():
@@ -41,7 +45,6 @@ def your_url():
     else:
         return redirect(url_for('urlshort.home'))
 
-
 @bp.route('/<string:code>')
 def redirect_to_url(code):
     if os.path.exists('urls.json'):
@@ -54,7 +57,6 @@ def redirect_to_url(code):
                     return redirect(url_for('static', filename='user_files/' + urls[code]['file']))
 
     return abort(404)
-
 
 @bp.errorhandler(404)
 def page_not_found(error):
