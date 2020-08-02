@@ -9,39 +9,40 @@ bp = Blueprint('urlshort', __name__)
 
 @bp.route('/')
 def home():
-    return render_template('home.html', codes=session.keys(), urls=session.values())
-
+    return render_template('home.html', codes=session.keys())
 
 @bp.route('/your-url', methods=['GET', 'POST'])
 def your_url():
     if request.method == 'POST':
         urls = {}
+        code = request.form['code']
+        url = request.form['url']
 
         if os.path.exists('urls.json'):
             with open('urls.json') as urls_file:
                 urls = json.load(urls_file)
 
-        if request.form['code'] in urls.keys():
+        if code in urls.keys():
             flash('That short name has already been taken. Please select another name.')
             return redirect(url_for('urlshort.home'))
 
+        # urls 
         if 'url' in request.form.keys():
-            flash('That url is already been created. Please select another name.')
-            return redirect(url_for('urlshort.home'))
-
-        if 'url' in request.form.keys():
-            urls[request.form['code']] = {'url': request.form['url']}
+            urls[code] = {'url': url}
         else:
+            # files 
             f = request.files['file']
-            full_name = request.form['code'] + secure_filename(f.filename)
+            full_name = code + secure_filename(f.filename)
+            print("Full Name:",full_name)
             f.save(
                 'D:/Projects/Flask/short-url-creator/application/static/user_files/' + full_name)
-            urls[request.form['code']] = {'file': full_name}
+            urls[code] = {'file': full_name}
 
         with open('urls.json', 'w') as url_file:
             json.dump(urls, url_file)
-            session[request.form['code']] = True
-        return render_template('your_url.html', code=request.form['code'])
+            session[code] = True
+
+        return render_template('your_url.html', code=code)
     else:
         return redirect(url_for('urlshort.home'))
 

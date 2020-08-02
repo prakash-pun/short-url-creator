@@ -51,18 +51,31 @@
     {% endif %}
     {% endwith %}
 
+        
+
     {% if codes %}
     <h2>Short URL:</h2>
     <div class="urls">
         {% for code in codes %}
+        
         <div class="column">
             <div class="card-two">
+                <div class="left">
                 <a href="{{ url_for('urlshort.redirect_to_url', code=code) }}" target="_blank">{{ code }}</a>
-                <p>Some text</p>
+                <!-- {% if session[url] %}
+                        <span class="user">{{ session[url] }}</span>
+                    {% endif %} -->
+                <p>URL is here</p>
+                </div>
+                <div class="right">
+                    <i class="fas fa-ellipsis-v"></i>
+                </div>
             </div>
+            
         </div>
         {% endfor %}
     </div>
     {% endif %}
 </div>
+
 {% endblock %}
