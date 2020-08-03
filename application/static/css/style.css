@@ -3,20 +3,18 @@
    --inbody-background: #3c5e90;
    --nav-shadow: 1px 1px 5px 1px #2f2c2c;
    --about: #A1C6D7;
-
-   /* fonts */
    --font-one: 'Montserrat', sans-serif;
 }
 
-html{
+html {
    scroll-behavior: smooth !important;
 }
 
-body{
+body {
    width: 100%;
    height: 100%;
    background-color: var(--about);
-   margin:0;
+   margin: 0;
    box-sizing: border-box;
 }
 
@@ -108,7 +106,7 @@ header {
 
 .urls {
    margin: 0 -5px;
-   
+
 }
 
 .urls:after {
@@ -126,19 +124,86 @@ header {
 }
 
 .card-two {
+   grid-template-columns: 95% 5%;
+   position: relative;
+   display: grid;
    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-   padding: 10px;
    background-color: #f1f1f1;
    margin-bottom: 20px;
    border-radius: 5px;
+
 }
 
-.card-two a{
+.card-two a {
    font-weight: bold;
    font-size: 1.2rem;
-
 }
 
-i:hover{
+.card-two .left {
+   padding: 10px 0px 10px 10px;
+   margin: 0;
+}
+
+.right i {
+   padding-top: 15px;
+   font-size: 18px;
+}
+
+.right i:hover {
    cursor: pointer;
+}
+
+/* Icon Grow */
+.hvr-icon-grow {
+   display: inline-block;
+   vertical-align: middle;
+   -webkit-transform: perspective(1px) translateZ(0);
+   transform: perspective(1px) translateZ(0);
+   box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+   -webkit-transition-duration: 0.3s;
+   transition-duration: 0.3s;
+}
+
+.hvr-icon-grow .hvr-icon {
+   -webkit-transform: translateZ(0);
+   transform: translateZ(0);
+   -webkit-transition-duration: 0.3s;
+   transition-duration: 0.3s;
+   -webkit-transition-property: transform;
+   transition-property: transform;
+   -webkit-transition-timing-function: ease-out;
+   transition-timing-function: ease-out;
+}
+
+.hvr-icon-grow:hover .hvr-icon,
+.hvr-icon-grow:focus .hvr-icon,
+.hvr-icon-grow:active .hvr-icon {
+   -webkit-transform: scale(1.1) translateZ(0);
+   transform: scale(1.1) translateZ(0);
+}
+
+.dropdown-content {
+
+   display: none;
+   position: absolute;
+   background-color: #f1f1f1;
+   min-width: 90px;
+   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+   border-radius: 5px;
+}
+
+.dropdown-content a {
+   font-size: 17px;
+   color: black;
+   padding-left: 5px;
+   text-decoration: none;
+   display: block;
+}
+
+.dropdown a:hover {
+   background-color: #ddd;
+}
+
+.show {
+   display: block;
 }

@@ -51,8 +51,6 @@
     {% endif %}
     {% endwith %}
 
-        
-
     {% if codes %}
     <h2>Short URL:</h2>
     <div class="urls">
@@ -62,13 +60,13 @@
             <div class="card-two">
                 <div class="left">
                 <a href="{{ url_for('urlshort.redirect_to_url', code=code) }}" target="_blank">{{ code }}</a>
-                <!-- {% if session[url] %}
-                        <span class="user">{{ session[url] }}</span>
-                    {% endif %} -->
-                <p>URL is here</p>
                 </div>
-                <div class="right">
-                    <i class="fas fa-ellipsis-v"></i>
+                <div class="right hvr-icon-grow dropdown">
+                    <i onclick="myFunction()" class="fas fa-ellipsis-v hvr-icon dropbtn"></i>
+                        <div id="myDropdown" class="dropdown-content">
+                            <a href="#delete">Delete</a>
+                            <a href="#rename">Rename</a>
+                        </div>
                 </div>
             </div>
             

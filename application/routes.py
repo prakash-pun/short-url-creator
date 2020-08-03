@@ -63,7 +63,6 @@ def redirect_to_url(code):
 def page_not_found(error):
     return render_template('page_not_found.html'), 404
 
-
 @bp.route('/api')
 def session_api():
     return jsonify(list(session.keys()))
