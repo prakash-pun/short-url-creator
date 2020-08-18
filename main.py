@@ -1,4 +1,4 @@
-from application import create_app
+from application import app
 
 def test_shorten(client):
    response = client.get('/')

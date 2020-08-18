@@ -1,23 +1,24 @@
+from application import app, db
 from flask import render_template, request, redirect, url_for, flash, abort, session, jsonify, Blueprint
 import json
 import os.path
 from werkzeug.utils import secure_filename
-from application import create_app
+from application.models import Url
 
 bp = Blueprint('urlshort', __name__)
 
-
 @bp.route('/')
 def home():
-    return render_template('home.html', codes=session.keys())
+    shorturl = Url.objects.order_by("-code")
+    return render_template('home.html', codes=shorturl, home=True)
+    # return render_template('home.html', codes=session.keys())
 
 @bp.route('/your-url', methods=['GET', 'POST'])
 def your_url():
     if request.method == 'POST':
         urls = {}
         code = request.form['code']
-        url = request.form['url']
-
+        
         if os.path.exists('urls.json'):
             with open('urls.json') as urls_file:
                 urls = json.load(urls_file)
@@ -28,14 +29,15 @@ def your_url():
 
         # urls 
         if 'url' in request.form.keys():
+            url = request.form['url']
             urls[code] = {'url': url}
+            # shorturl = Url(code=code, url=url)
+            # shorturl.save()
+        # files
         else:
-            # files 
             f = request.files['file']
             full_name = code + secure_filename(f.filename)
-            print("Full Name:",full_name)
-            f.save(
-                'D:/Projects/Flask/short-url-creator/application/static/user_files/' + full_name)
+            f.save('D:/Projects/Flask/short-url-creator/application/static/user_files/' + full_name)
             urls[code] = {'file': full_name}
 
         with open('urls.json', 'w') as url_file:

@@ -31,7 +31,7 @@
                     <label for="code">Short Name</label>
                     <input type="text" class="form-control" name="code" id="code" value="" required>
                     <br>
-                    <label for="long_url">Website URL</label>
+                    <label for="long_url">File URL</label>
                     <input type="file" class="form-control" name="file" id="file" required>
                     <br>
                     <button class="btn btn-primary btn-lg btn-block" type="submit">Shorten</button>
@@ -54,26 +54,29 @@
     {% if codes %}
     <h2>Short URL:</h2>
     <div class="urls">
-        {% for code in codes %}
-        
-        <div class="column">
-            <div class="card-two">
-                <div class="left">
-                <a href="{{ url_for('urlshort.redirect_to_url', code=code) }}" target="_blank">{{ code }}</a>
-                </div>
-                <div class="right hvr-icon-grow dropdown">
-                    <i onclick="myFunction()" class="fas fa-ellipsis-v hvr-icon dropbtn"></i>
-                        <div id="myDropdown" class="dropdown-content">
-                            <a href="#delete">Delete</a>
-                            <a href="#rename">Rename</a>
-                        </div>
+    {% for code in codes %}
+    <div class="column">
+        <div class="card-two">
+            <div class="left">
+                <a href="{{ url_for('urlshort.redirect_to_url', code=code['code']) }}" target="_blank">{{ code["code"] }}</a>
+                <!-- <p>{{ code.url }}</p> -->
+            </div>
+            <div class="right hvr-icon-grow dropdown">
+                <i onclick="myFunction()" class="fas fa-ellipsis-v hvr-icon dropbtn"></i>
+                <div id="myDropdown" class="dropdown-content">
+                    <a href="#delete">Delete</a>
+                    <a href="#rename">Rename</a>
                 </div>
             </div>
-            
         </div>
-        {% endfor %}
+    
+    </div>
+    {% else %}
+    <h2>No shortcut url Created.</h2>
+    {% endfor %}
     </div>
     {% endif %}
+
 </div>
 
 {% endblock %}
