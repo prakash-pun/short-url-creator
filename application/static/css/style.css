@@ -28,6 +28,12 @@ header {
    width: 100%;
 }
 
+@media screen and (min-width: 800px) {
+   header{
+      display: inline;
+   }
+}
+
 .container {
    padding: 16px;
    margin-top: 5rem;
@@ -207,3 +213,4 @@ header {
 .show {
    display: block;
 }
+
