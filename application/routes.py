@@ -31,8 +31,8 @@ def your_url():
         if 'url' in request.form.keys():
             url = request.form['url']
             urls[code] = {'url': url}
-            # shorturl = Url(code=code, url=url)
-            # shorturl.save()
+            shorturl = Url(code=code, url=url)
+            shorturl.save()
         # files
         else:
             f = request.files['file']
