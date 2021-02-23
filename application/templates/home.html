@@ -63,19 +63,19 @@
                 <a href="{{ url_for('urlshort.redirect_to_url', code=code) }}">
                 </a>
             </div>
-            <div class="right hvr-icon-grow dropdown">
+            <!--<div class="right hvr-icon-grow dropdown">
                 <i onclick="myFunction()" class="fas fa-ellipsis-v hvr-icon dropbtn"></i>
                 <div id="myDropdown" class="dropdown-content">
                     <a href="#delete">Delete</a>
                     <a href="#rename">Rename</a>
                 </div>
-            </div>
+            </div>-->
         </div>
     
     </div>
+    {% endfor %}
     {% else %}
     <h2>No shortcut url Created.</h2>
-    {% endfor %}
     </div>
     {% endif %}
 
